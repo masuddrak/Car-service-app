@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/Sheard/Header";
 import Footer from "@/components/Sheard/Footer";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -16,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="mytheme">
       <body className={inter.className}>
         <Header></Header>
-        {children}
+        <div className="container mx-auto">{children}</div>
         <Footer></Footer>
       </body>
     </html>

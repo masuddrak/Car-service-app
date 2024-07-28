@@ -5,7 +5,7 @@ import ServiceCard from '../Cards/ServiceCard';
 const Services = () => {
     console.log(services)
     return (
-        <div className='grid grid-cols-3 gap-7'>
+        <div className='grid grid-cols-3 gap-14'>
             {
                 services.map(service=><ServiceCard key={service._id} service={service}></ServiceCard>)
             }

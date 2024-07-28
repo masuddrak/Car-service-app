@@ -1,23 +1,27 @@
+import Image from "next/image";
 import React from "react";
+import { FaArrowRightLong } from "react-icons/fa6";
 
-const ServiceCard = () => {
+const ServiceCard = ({ service }) => {
+  const { img, title, description, price } = service;
   return (
-    <div className="card bg-base-100 w-96 shadow-xl">
+    <div className="rounded-md bg-base-100  shadow-xl hover:scale-105 transition-all">
       <figure>
-        {/* <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
-        /> */}
+        <Image
+          src={img}
+          alt="service"
+          height={120}
+          width={430}
+          className="h-[250px] w-full object-cover rounded-t-md"
+        ></Image>
       </figure>
-      <div className="card-body">
+      <div className="card-body ">
         <h2 className="card-title">
-          Shoes!
-          <div className="badge badge-secondary">NEW</div>
+          {title}
         </h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="card-actions justify-end">
-          <div className="badge badge-outline">Fashion</div>
-          <div className="badge badge-outline">Products</div>
+        <div className="text-primary flex justify-between items-center mt-4">
+          <p className="text-primary">Price: ${price}</p>
+          <FaArrowRightLong className=""></FaArrowRightLong>
         </div>
       </div>
     </div>

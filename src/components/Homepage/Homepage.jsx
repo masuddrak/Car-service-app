@@ -3,7 +3,7 @@ import Services from './Services';
 
 const Homepage = () => {
     return (
-        <div className='container mx-auto py-6'>
+        <div className=' py-6'>
             <Services></Services>
         </div>
     );

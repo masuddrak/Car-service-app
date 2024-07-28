@@ -24,7 +24,7 @@ const Header = () => {
     },
   ];
   return (
-    <nav className="bg-base-100 ">
+    <nav className="bg-base-100 mb-3">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -60,6 +60,7 @@ const Header = () => {
             src="/assets/logo.svg"
             height={40}
             width={80}
+            className="w-[60px] w-[100px]"
           ></Image>
         </div>
         <div className="navbar-center hidden lg:flex">
