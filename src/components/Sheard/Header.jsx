@@ -77,7 +77,8 @@ const Header = () => {
             <CiSearch></CiSearch>
             <IoBagHandleOutline/>
           </div>
-          <button className="btn btn-outline btn-primary rounded-md">Appoinment</button>
+          <button className="btn btn-outline px-4 py-1 btn-primary rounded-md">Appoinment</button>
+          <Link href="/login" className="btn px-4 py-1 btn-primary rounded-md">Sign In</Link>
         </div>
       </div>
     </nav>

@@ -1,8 +1,10 @@
+"use client";
 import SignupForm from "@/components/authentication/SignupForm";
 import Image from "next/image";
 import React from "react";
 
 const page = () => {
+  
   return (
     <div className="grid grid-cols-2 justify-between items-center  py-10">
       <Image
