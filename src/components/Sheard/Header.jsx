@@ -1,10 +1,15 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 import { IoBagHandleOutline } from "react-icons/io5";
+import { signOut, useSession } from "next-auth/react";
 
 const Header = () => {
+  const [isLogin,setIsLogin]=useState(false)
+  const authInfo = useSession();
+  const userInfo = authInfo?.data?.user;
   const navlinks = [
     {
       path: "/",
@@ -75,10 +80,35 @@ const Header = () => {
         <div className="navbar-end flex gap-4 items-center">
           <div className="flex items-center text-xl gap-4">
             <CiSearch></CiSearch>
-            <IoBagHandleOutline/>
+            <IoBagHandleOutline />
           </div>
-          <button className="btn btn-outline px-4 py-1 btn-primary rounded-md">Appoinment</button>
-          <Link href="/login" className="btn px-4 py-1 btn-primary rounded-md">Sign In</Link>
+          {/* <button className="btn btn-outline px-4 py-1 btn-primary rounded-md">
+            Appoinment
+          </button> */}
+          {userInfo ? (
+            <div className="relative text-center ">
+              <div className="avatar online cursor-pointer" onClick={()=>setIsLogin(!isLogin)}>
+                <div className="w-12 rounded-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+              </div>
+            {
+              isLogin && <div className="w-[300px]  border-white absolute top-12 -right-2 text-xl bg-primary text-white p-5 rounded-md shadow-lg shadow-gray-500">
+              <p>{userInfo.name}</p>
+              <p>{userInfo.email}</p>
+              <button onClick={()=>signOut()} className="bg-white text-black px-5 py-2 rounded-md mt-4 text-lg">Sign Out</button>
+              
+            </div>
+            }
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="btn px-4 py-1 btn-primary rounded-md"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </div>
     </nav>

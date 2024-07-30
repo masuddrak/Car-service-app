@@ -1,11 +1,37 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const [error,setError]=useState("")
+  const router = useRouter();
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res.error) {
+        setError("Invalid Credentials");
+        return;
+      }
+
+      router.replace("dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="p-20 border-[1px] rounded-md">
       <h3 className="text-xl font-semibold text-center">Login</h3>
-      <form className="w-full mt-12 space-y-4">
+      <form onSubmit={handleLogin} className="w-full mt-12 space-y-4">
         <div className="">
           <label htmlFor="" className="">
             Email

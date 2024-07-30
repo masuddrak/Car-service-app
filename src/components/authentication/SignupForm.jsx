@@ -1,20 +1,35 @@
 "use client"
 import axios from 'axios';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+
+import React, { useState } from 'react';
 
 const SignupForm = () => {
+  const [error,setError]=useState("")
+  const router=useRouter()
   const handelForm=async(e)=>{
     e.preventDefault()
     const name =e.target.name.value
     const email =e.target.email.value
     const password =e.target.password.value
     const userInfo={name,email,password}
+   
     try {
+      
+      // create user
       const res=await axios.post("/signup/api",userInfo)
-      console.log(res)
+  
+      if(res.status===200){
+        const form=e.target
+        form.reset()
+        router.push("/")
+      }
     } catch (error) {
-      console.log(error)
+      if(error.response.status===500){
+        setError("already exis user")
+      }
+      console.log(error.response)
     }
   }
     return (
@@ -29,6 +44,7 @@ const SignupForm = () => {
           <input
             type="text"
             name="name"
+            required
             placeholder="Enter Your NName"
             className="border-[1px] p-2 rounded-sm w-full  outline-0"
           />
@@ -41,6 +57,7 @@ const SignupForm = () => {
           <input
             type="email"
             name="email"
+            required
             placeholder="Enter Your Email"
             className="border-[1px] p-2 rounded-sm w-full  outline-0"
           />
@@ -53,6 +70,7 @@ const SignupForm = () => {
           <input
             type="password"
             name="password"
+            required
             placeholder="Enter Your Password"
             className="border-[1px] p-2 rounded-sm w-full  outline-0"
           />
@@ -66,6 +84,9 @@ const SignupForm = () => {
           />
         </div>
       </form>
+      {
+        error && <p className='text-primary my-3'>{error}</p>
+      }
       <div className="flex mt-4">
         <p>Are you ne</p>
         <Link href="/login" className="underline">Login Now</Link>
